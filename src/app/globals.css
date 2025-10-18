@@ -24,6 +24,23 @@
     --input: 214.3 31.8% 91.4%;
     --ring: 222.2 84% 4.9%;
     --radius: 0.5rem;
+
+    /* Cores financeiras específicas */
+    --profit: 142 76% 36%;
+    --profit-light: 142 76% 95%;
+    --profit-foreground: 142 76% 20%;
+    
+    --loss: 0 84% 60%;
+    --loss-light: 0 84% 95%;
+    --loss-foreground: 0 84% 40%;
+    
+    --warning: 43 96% 56%;
+    --warning-light: 43 96% 95%;
+    --warning-foreground: 43 96% 30%;
+    
+    --info: 199 89% 48%;
+    --info-light: 199 89% 95%;
+    --info-foreground: 199 89% 30%;
   }
 
   .dark {
@@ -46,6 +63,23 @@
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 212.7 26.8% 83.9%;
+
+    /* Cores financeiras modo escuro */
+    --profit: 142 76% 45%;
+    --profit-light: 142 76% 15%;
+    --profit-foreground: 142 76% 80%;
+    
+    --loss: 0 84% 65%;
+    --loss-light: 0 84% 15%;
+    --loss-foreground: 0 84% 80%;
+    
+    --warning: 43 96% 65%;
+    --warning-light: 43 96% 15%;
+    --warning-foreground: 43 96% 80%;
+    
+    --info: 199 89% 55%;
+    --info-light: 199 89% 15%;
+    --info-foreground: 199 89% 80%;
   }
 }
 
@@ -53,7 +87,108 @@
   * {
     @apply border-border;
   }
+  
   body {
     @apply bg-background text-foreground;
+    font-family: Inter, system-ui, sans-serif;
+  }
+  
+  /* Tipografia personalizada */
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold tracking-tight;
+  }
+  
+  /* Números tabulares para valores financeiros */
+  .tabular-nums {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@layer components {
+  /* Componentes financeiros */
+  .currency-positive {
+    @apply text-profit font-semibold font-mono tabular-nums;
+  }
+  
+  .currency-negative {
+    @apply text-loss font-semibold font-mono tabular-nums;
+  }
+  
+  .currency-neutral {
+    @apply text-foreground font-medium font-mono tabular-nums;
+  }
+  
+  .percentage-positive {
+    @apply text-profit text-sm font-medium;
+  }
+  
+  .percentage-negative {
+    @apply text-loss text-sm font-medium;
+  }
+  
+  /* Badges financeiros */
+  .badge-profit {
+    @apply bg-profit-light text-profit-foreground border border-profit/20 px-2 py-1 rounded-md text-xs font-medium;
+  }
+  
+  .badge-loss {
+    @apply bg-loss-light text-loss-foreground border border-loss/20 px-2 py-1 rounded-md text-xs font-medium;
+  }
+  
+  .badge-warning {
+    @apply bg-warning-light text-warning-foreground border border-warning/20 px-2 py-1 rounded-md text-xs font-medium;
+  }
+  
+  .badge-info {
+    @apply bg-info-light text-info-foreground border border-info/20 px-2 py-1 rounded-md text-xs font-medium;
+  }
+  
+  /* Cards financeiros */
+  .card-financial {
+    @apply bg-card border-l-4 border-l-primary rounded-lg shadow-sm p-6;
+  }
+  
+  .card-metric {
+    @apply bg-gradient-to-br from-card to-muted/50 rounded-lg shadow-lg p-6;
+  }
+  
+  /* Indicadores visuais */
+  .trend-up::before {
+    content: "↗";
+    @apply text-profit mr-1;
+  }
+  
+  .trend-down::before {
+    content: "↘";
+    @apply text-loss mr-1;
+  }
+  
+  /* Transições */
+  .transition-smooth {
+    @apply transition-all duration-200 ease-in-out;
+  }
+  
+  /* Layouts responsivos */
+  .dashboard-grid {
+    @apply grid grid-cols-1 md:grid-cols-12 gap-6;
+  }
+  
+  .card-responsive {
+    @apply col-span-1 md:col-span-6 lg:col-span-4 xl:col-span-3;
+  }
+}
+
+@layer utilities {
+  /* Utilitários personalizados */
+  .text-display {
+    @apply text-6xl font-bold tracking-tight;
+  }
+  
+  .text-currency {
+    @apply text-2xl font-semibold font-mono tabular-nums;
+  }
+  
+  .text-percentage {
+    @apply text-base font-medium;
   }
 }
